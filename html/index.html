@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Announcement</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Orbitron:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div id="announceWrap">
+
+    <!-- Container logo (tách đôi) -->
+    <div id="logoContainer">
+        <div id="logoLeft"  class="half"></div>
+        <div id="logoRight" class="half"></div>
+    </div>
+
+    <!-- Nền thông báo -->
+    <div id="notify">
+        <div class="bar-glow-top"></div>
+        <div class="bar-glow-bottom"></div>
+        <div class="bar-corner bar-corner-left"></div>
+        <div class="bar-corner bar-corner-right"></div>
+        <div class="ticker-track">
+            <div class="ticker-content" id="tickerContent"></div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="admin-panel">
+    <div class="panel-backdrop" onclick="closeAdminPanel()"></div>
+    <div class="panel-glass">
+
+        <div class="panel-header">
+            <div class="panel-logo">
+                <div class="logo-dot-pulse"></div>
+                <span>txAnnounce</span>
+            </div>
+            <div class="panel-tabs">
+                <button class="tab-btn active" id="tabAnnounce" onclick="switchTab('announce')">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z"/></svg>
+                    Thông báo
+                </button>
+                <button class="tab-btn" id="tabSettings" onclick="switchTab('settings')">
+                    <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/></svg>
+                    Cài đặt
+                </button>
+            </div>
+            <button class="panel-close" onclick="closeAdminPanel()">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </button>
+        </div>
+
+        <!-- TAB THÔNG BÁO -->
+        <div class="tab-content" id="contentAnnounce">
+            <div class="panel-body">
+                <div class="field-group">
+                    <label class="field-label">NỘI DUNG THÔNG BÁO</label>
+                    <div class="input-wrapper">
+                        <textarea id="msgInput" class="glass-input" placeholder="Nhập nội dung thông báo gửi đến toàn server..." rows="3" maxlength="300"></textarea>
+                        <div class="char-count"><span id="charCount">0</span>/300</div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">MẪU NHANH</label>
+                    <div class="templates-grid">
+                        <button class="tpl-btn" onclick="useTemplate('🛠️ Server bảo trì sau 10 phút. Hoàn thành công việc ngay!')">
+                            <span class="tpl-icon">🛠️</span><span>Bảo trì</span>
+                        </button>
+                        <button class="tpl-btn" onclick="useTemplate('⚠️ Cảnh báo: Vi phạm nội quy sẽ bị xử lý nghiêm!')">
+                            <span class="tpl-icon">⚠️</span><span>Cảnh báo</span>
+                        </button>
+                        <button class="tpl-btn" onclick="useTemplate('🎉 Sự kiện đặc biệt đang diễn ra! Tham gia ngay.')">
+                            <span class="tpl-icon">🎉</span><span>Sự kiện</span>
+                        </button>
+                        <button class="tpl-btn" onclick="useTemplate('🔄 Server restart trong 5 phút. Hãy lưu dữ liệu.')">
+                            <span class="tpl-icon">🔄</span><span>Restart</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <button class="action-btn ghost" onclick="previewMessage()">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" stroke-width="2"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" stroke="currentColor" stroke-width="2"/></svg>
+                        Xem thử
+                    </button>
+                    <button class="action-btn solid" id="btnSend" onclick="sendMessage()">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Gửi thông báo
+                    </button>
+                </div>
+                <div id="statusMsg" class="status-msg"></div>
+            </div>
+        </div>
+
+        <!-- TAB CÀI ĐẶT -->
+        <div class="tab-content hidden" id="contentSettings">
+            <div class="panel-body">
+
+                <div class="field-group">
+                    <label class="field-label">LOGO SERVER</label>
+                    <div class="logo-upload-area" id="logoUploadArea" onclick="document.getElementById('logoFileInput').click()">
+                        <div class="upload-preview" id="uploadPreview">
+                            <svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" stroke="currentColor" stroke-width="1.5" opacity="0.3"/><path d="M24 16v8m0 0v8m0-8h8m-8 0h-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+                            <span>Chọn ảnh logo</span>
+                            <span class="upload-hint">PNG, JPG — hiển thị tốt nhất 13vh × 13vh</span>
+                        </div>
+                    </div>
+                    <input type="file" id="logoFileInput" accept="image/*" style="display:none" onchange="handleLogoUpload(this)">
+                    <button class="field-btn-small" onclick="clearLogo()" style="margin-top:6px">✕ Xóa logo</button>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">THEME MÀU</label>
+                    <div class="preset-row">
+                        <button class="preset-swatch" data-preset="crimson" title="Crimson" onclick="applyPreset('crimson')" style="background:linear-gradient(135deg,#c0392b,#922b21)"></button>
+                        <button class="preset-swatch" data-preset="neon"    title="Neon Cyan" onclick="applyPreset('neon')"    style="background:linear-gradient(135deg,#00d2ff,#0070c0)"></button>
+                        <button class="preset-swatch" data-preset="gold"    title="Gold" onclick="applyPreset('gold')"    style="background:linear-gradient(135deg,#f39c12,#d68910)"></button>
+                        <button class="preset-swatch" data-preset="emerald" title="Emerald" onclick="applyPreset('emerald')" style="background:linear-gradient(135deg,#00b894,#00695c)"></button>
+                        <button class="preset-swatch" data-preset="violet"  title="Violet" onclick="applyPreset('violet')"  style="background:linear-gradient(135deg,#8e44ad,#6c3483)"></button>
+                        <button class="preset-swatch" data-preset="sunset"  title="Sunset" onclick="applyPreset('sunset')"  style="background:linear-gradient(135deg,#e74c3c,#f39c12)"></button>
+                        <button class="preset-swatch" data-preset="ice"     title="Ice" onclick="applyPreset('ice')"     style="background:linear-gradient(135deg,#74b9ff,#a29bfe)"></button>
+                        <button class="preset-swatch" data-preset="matrix"  title="Matrix" onclick="applyPreset('matrix')"  style="background:linear-gradient(135deg,#00ff41,#008000)"></button>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">MÀU TÙY CHỈNH</label>
+                    <div class="color-rows">
+                        <div class="color-row">
+                            <span class="color-label">Accent / Viền</span>
+                            <div class="color-right">
+                                <div class="color-preview" id="prevAccent"></div>
+                                <input type="color" id="clrAccent" class="color-picker" oninput="onColorChange()">
+                                <span class="color-hex" id="hexAccent">#cc2020</span>
+                            </div>
+                        </div>
+                        <div class="color-row">
+                            <span class="color-label">Nền thanh ticker</span>
+                            <div class="color-right">
+                                <div class="color-preview" id="prevBar"></div>
+                                <input type="color" id="clrBar"    class="color-picker" oninput="onColorChange()">
+                                <span class="color-hex" id="hexBar">#0a0000</span>
+                            </div>
+                        </div>
+                        <div class="color-row">
+                            <span class="color-label">Chữ ticker</span>
+                            <div class="color-right">
+                                <div class="color-preview" id="prevTxt"></div>
+                                <input type="color" id="clrTxt"    class="color-picker" oninput="onColorChange()">
+                                <span class="color-hex" id="hexTxt">#ffffff</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field-group">
+                    <label class="field-label">ĐIỀU CHỈNH</label>
+                    <div class="slider-rows">
+                        <div class="slider-row">
+                            <span class="slider-label">Âm lượng</span>
+                            <input type="range" id="sldVol"   class="slider" min="0"   max="100" value="55" oninput="onSliderChange()">
+                            <span class="slider-val" id="valVol">55%</span>
+                        </div>
+                        <div class="slider-row">
+                            <span class="slider-label">Tốc độ text</span>
+                            <input type="range" id="sldSpeed" class="slider" min="60"  max="380" value="180" oninput="onSliderChange()">
+                            <span class="slider-val" id="valSpeed">180</span>
+                        </div>
+                        <div class="slider-row">
+                            <span class="slider-label">Vị trí dọc</span>
+                            <input type="range" id="sldTop"   class="slider" min="0"   max="280" value="20" oninput="onSliderChange()">
+                            <span class="slider-val" id="valTop">20px</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="action-row">
+                    <button class="action-btn ghost" onclick="resetSettings()">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M3 3v5h5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Mặc định
+                    </button>
+                    <button class="action-btn solid" onclick="saveSettings()">
+                        <svg viewBox="0 0 24 24" fill="none"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z" stroke="currentColor" stroke-width="2"/><polyline points="17 21 17 13 7 13 7 21" stroke="currentColor" stroke-width="2"/><polyline points="7 3 7 8 15 8" stroke="currentColor" stroke-width="2"/></svg>
+                        Lưu cài đặt
+                    </button>
+                </div>
+                <div id="settingsStatus" class="status-msg"></div>
+            </div>
+        </div>
+
+        <div class="panel-footer">
+            <div class="footer-dot"></div>
+            <span>Kết nối server</span>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
