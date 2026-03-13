@@ -1,4 +1,3 @@
-# tx-announce-ui
 
 ![FiveM](https://img.shields.io/badge/FiveM-Script-orange)
 ![Free](https://img.shields.io/badge/Price-Free-green)
@@ -50,3 +49,6 @@ https://discord.gg/cNTbSTExvm
 
 Free for the FiveM community.  
 You are free to use and modify this script.
+=======
+A free FiveM announcement UI with sound effects and customizable configuration for server notifications.
+>>>>>>> 0b964c788cdb009193e2c7a3ed18cb9acab1d5dc
